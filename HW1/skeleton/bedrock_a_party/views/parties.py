@@ -93,6 +93,9 @@ def edit_foodlist(id, user, item):
     result = ""
 
     if 'POST' == request.method:
+        users = party_list[int(id)]['guests']
+        if user not in users : 
+            abort(401)
 
         result = party1.add_to_food_list(item,user)
 
@@ -100,7 +103,7 @@ def edit_foodlist(id, user, item):
 
         result = party1.remove_from_food_list(item, user)
 
-    return jsonify(result.serialize()) 
+    return jsonify(result.serialize())
 
 
 #These are utility functions. Use them, DON'T CHANGE THEM!!
